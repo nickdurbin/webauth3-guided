@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
+  // Authorization
   const token = req.headers.authorization;
   if (token) {
     // check token, if good, just next()
@@ -10,8 +11,11 @@ module.exports = (req, res, next) => {
       (err, decodedToken) => {
         if (err) {
           // this would mean the token is bad
+          res.status(401).json({ message: 'bad token'})
         } else {
           // happy path
+          req.decodedToken = decodedToken;
+          next()
         }
       }
     )
