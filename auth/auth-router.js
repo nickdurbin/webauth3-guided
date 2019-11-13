@@ -47,6 +47,18 @@ function generateToken(user) {
     username: user.username,
     roles: ['student'],
   }
+  const options = {
+    expiresIn = '1d',
+  }
+
+  const result = jwt.sign(
+    payload,
+    // process.env.NODE_ENV === 'development' ? 'devsecret' : process.env.SECRET,
+    'THIS IS THE SECRET',
+    options,
+  )
+
+  return result;
 }
 
 module.exports = router;
