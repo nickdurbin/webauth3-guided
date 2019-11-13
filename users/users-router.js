@@ -13,11 +13,19 @@ router.get('/', restricted, (req, res) => {
   // when we made the token, a roles array was part of the payload
   // make sure there's a role of "student" (which we hardcoded when we made the token)
   // do the right thing! ONLY STUDENTS SHOULD BE ABLE TO GET THE LIST OF USERS
-  Users.find()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => res.send(err));
+  if (req.decodedToken.roles.includes("student")) {
+    Users.find()
+      .then(users => {
+        res.json(users);
+      })
+      .catch(err => {
+        res.send(err)
+      });
+  } else {
+    res.json({
+      message: "You don't have the right role to access this information"
+    });
+  }
 });
 
 module.exports = router;
