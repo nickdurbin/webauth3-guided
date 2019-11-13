@@ -48,7 +48,7 @@ function generateToken(user) {
     roles: ['student'],
   }
   const options = {
-    expiresInL: '1d',
+    expiresIn: '1d',
   }
 
   const result = jwt.sign(
