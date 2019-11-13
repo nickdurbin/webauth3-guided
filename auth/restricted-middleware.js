@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
       (err, decodedToken) => {
         if (err) {
           // this would mean the token is bad
-          res.status(401).json({ message: 'bad token'})
+          res.status(401).json({ message: err.message })
         } else {
           // happy path
           req.decodedToken = decodedToken;
