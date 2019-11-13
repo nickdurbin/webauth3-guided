@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next) => {
   // Authorization
   const token = req.headers.authorization;
+  // if (token && inWhiteList(token)) {
+  // if (token && !inBlacklist(token)) {
   if (token) {
     // check token, if good, just next()
     jwt.verify(
