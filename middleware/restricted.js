@@ -1,14 +1,18 @@
+const jwt = require("jsonwebtoken")
+const secrets = require("../config/secrets")
+
 module.exports = () => {
   return (req, res, next) => {
-    // we have access to req.session since we installed
-    // installed the express-session middleware.
-    if (!req.session || !req.session.user) {
+    try {
+      const token = req.headers.authorization
+      const decoded = jwt.verify(token, secrets.jwt)
+
+      req.userId = decoded.subject
+      next()
+    } catch (err) {
       return res.status(401).json({
         message: "Invalid credentials",
       })
     }
-
-    // if we reach this point, the user is authenticated!
-    next()
   }
 }

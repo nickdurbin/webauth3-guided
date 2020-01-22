@@ -1,6 +1,6 @@
-# Node Auth 2 Guided Project
+# Node Auth 3 Guided Project
 
-Guided project for **Node Auth 2** Module.
+Guided project for **Node Auth 3** Module.
 
 ## Prerequisites
 
